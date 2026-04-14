@@ -27,8 +27,10 @@ Anduril's website conveys **military-grade technology with Silicon Valley polish
 ## Typography
 
 ### Font Stack
-- **Headings:** Sans-serif, geometric/grotesque style (similar to "ABCDiatype", "Neue Haas Grotesk", or "Inter")
-- **Body:** Clean sans-serif, high readability
+- **Primary:** `'Inter', 'Noto Sans TC', -apple-system, sans-serif`
+- **Headings:** Inter (English) / Noto Sans TC (中文), geometric/grotesque style
+- **Body:** Same stack, high readability for both English and Chinese
+- **Chinese Font:** Noto Sans TC (思源黑體) — geometric, matches Anduril's sharp aesthetic
 - **Monospace (optional for data):** `"JetBrains Mono"`, `"SF Mono"`, monospace
 
 ### Font Sizes (Desktop)

@@ -10,7 +10,7 @@ html {
 }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: 'Inter', 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
   background: #0A0A0A;
   color: #A0A0A0;
   line-height: 1.6;
