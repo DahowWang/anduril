@@ -59,8 +59,7 @@
             <span class="num">/01</span>
           </div>
           <div class="choose-tickets" id="ticket-choose">
-            <label class="choose-card" data-ticket="bundle">
-              <input type="radio" name="ticket" value="bundle" style="position:absolute;opacity:0;pointer-events:none" />
+            <div class="choose-card" data-ticket="bundle">
               <div class="code">BUNDLE / SEAT.B · RSV.002</div>
               <h4>套票（含書）</h4>
               <div class="seats">含《無人軍團》一本 · 限 30 席</div>
@@ -70,9 +69,16 @@
                 <li>限定小禮</li>
                 <li>簽書活動</li>
               </ul>
-            </label>
-            <label class="choose-card" data-ticket="admission">
-              <input type="radio" name="ticket" value="admission" style="position:absolute;opacity:0;pointer-events:none" />
+              <div class="qty-row">
+                <span class="qty-label">數量 / QTY</span>
+                <div class="qty">
+                  <button type="button" data-action="dec" data-ticket="bundle" disabled>−</button>
+                  <span data-qty="bundle">0</span>
+                  <button type="button" data-action="inc" data-ticket="bundle">+</button>
+                </div>
+              </div>
+            </div>
+            <div class="choose-card" data-ticket="admission">
               <div class="code">ADMISSION / SEAT.C · RSV.003</div>
               <h4>單人票</h4>
               <div class="seats">不含書籍 · 限 30 席</div>
@@ -83,7 +89,15 @@
                 <li>限定小禮</li>
                 <li>簽書活動</li>
               </ul>
-            </label>
+              <div class="qty-row">
+                <span class="qty-label">數量 / QTY</span>
+                <div class="qty">
+                  <button type="button" data-action="dec" data-ticket="admission" disabled>−</button>
+                  <span data-qty="admission">0</span>
+                  <button type="button" data-action="inc" data-ticket="admission">+</button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -208,7 +222,7 @@
         <h4>無人軍團 / 新書發表暨簽名會</h4>
         <div class="meta">
           <span><span class="lab">DATE</span>2026.05.17 — SUN</span>
-          <span><span class="lab">TIME</span>13:00 報到 · 14:00 開始</span>
+          <span><span class="lab">TIME</span>13:30 報到 · 14:00 開始</span>
           <span><span class="lab">VENUE</span>Tempo House Restaurant &amp; Bar</span>
           <span><span class="lab">ADDR</span>台北市中山區建國北路二段 12 號</span>
         </div>
@@ -252,28 +266,34 @@
         admission: { name: "單人票",       code: "RSV.003", price: 499, note: "不含書籍" }
       };
 
-      // 1. URL ?t=bundle / ?t=admission 預選
-      const urlT = new URLSearchParams(location.search).get("t");
-      if (urlT && TICKETS[urlT]) {
-        const card = document.querySelector(`[data-ticket="${urlT}"]`);
-        if (card) {
-          card.classList.add("selected");
-          card.querySelector("input").checked = true;
-          updateSummary(urlT);
-        }
+      // 1. 票種數量管理
+      const QTY = { bundle: 0, admission: 0 };
+      const MAX_PER_TICKET = 30;
+
+      function setQty(ticketKey, qty) {
+        qty = Math.max(0, Math.min(MAX_PER_TICKET, qty));
+        QTY[ticketKey] = qty;
+        document.querySelector(`[data-qty="${ticketKey}"]`).textContent = String(qty);
+        const card = document.querySelector(`.choose-card[data-ticket="${ticketKey}"]`);
+        card.classList.toggle("selected", qty > 0);
+        card.querySelector('[data-action="dec"]').disabled = qty === 0;
+        card.querySelector('[data-action="inc"]').disabled = qty >= MAX_PER_TICKET;
+        updateSummary();
+        validate();
       }
 
-      // 2. 票種卡片點選
-      document.querySelectorAll(".choose-card").forEach(card => {
-        card.addEventListener("click", e => {
-          // 防止點到內部 input 被 label 點兩次
-          document.querySelectorAll(".choose-card").forEach(c => c.classList.remove("selected"));
-          card.classList.add("selected");
-          card.querySelector("input").checked = true;
-          updateSummary(card.dataset.ticket);
-          validate();
+      document.querySelectorAll(".qty button").forEach(btn => {
+        btn.addEventListener("click", e => {
+          e.preventDefault();
+          const action = btn.dataset.action;
+          const ticket = btn.dataset.ticket;
+          setQty(ticket, QTY[ticket] + (action === "inc" ? 1 : -1));
         });
       });
+
+      // 2. URL ?t=bundle / ?t=admission 預選 1 張
+      const urlT = new URLSearchParams(location.search).get("t");
+      if (urlT && TICKETS[urlT]) setQty(urlT, 1);
 
       // 2.5 發票切換
       let invType = "ecloud";
@@ -352,7 +372,7 @@
       }
 
       function validate() {
-        const ticket = document.querySelector('input[name="ticket"]:checked');
+        const totalQty = QTY.bundle + QTY.admission;
         const name   = document.getElementById("f-name").value.trim();
         const phone  = document.getElementById("f-phone").value.trim();
         const email  = document.getElementById("f-email").value.trim();
@@ -368,7 +388,7 @@
           invOk = /^\d{8}$/.test(taxId) && taxTitle.length >= 1;
         }
 
-        const ok = !!ticket
+        const ok = totalQty > 0
                 && name.length >= 2
                 && /^09\d{8}$/.test(phone)
                 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
@@ -378,23 +398,35 @@
       }
 
       // 5. 摘要更新
-      function updateSummary(ticketKey) {
+      function updateSummary() {
         const wrap  = document.getElementById("sum-line-wrap");
         const total = document.getElementById("sum-total");
         const val   = document.getElementById("sum-total-val");
-        if (!ticketKey || !TICKETS[ticketKey]) {
-          wrap.innerHTML = '<div class="sum-empty">SELECT A TICKET</div>';
-          total.hidden = true;
-          return;
+        let totalAmount = 0;
+        const lines = [];
+        for (const key of ["bundle", "admission"]) {
+          if (QTY[key] > 0) {
+            const t = TICKETS[key];
+            const sub = t.price * QTY[key];
+            totalAmount += sub;
+            lines.push(
+              '<div class="sum-line">' +
+                '<span class="name">' + t.name + ' × ' + QTY[key] +
+                  '<small>' + t.code + ' · NT$ ' + t.price.toLocaleString() + ' / 張</small>' +
+                '</span>' +
+                '<span class="val">NT$ ' + sub.toLocaleString() + '</span>' +
+              '</div>'
+            );
+          }
         }
-        const t = TICKETS[ticketKey];
-        wrap.innerHTML = `
-          <div class="sum-line">
-            <span class="name">${t.name}<small>${t.code} · ${t.note}</small></span>
-            <span class="val">NT$ ${t.price.toLocaleString()}</span>
-          </div>`;
-        val.textContent = t.price.toLocaleString();
-        total.hidden = false;
+        if (lines.length === 0) {
+          wrap.innerHTML = '<div class="sum-empty">SELECT TICKETS</div>';
+          total.hidden = true;
+        } else {
+          wrap.innerHTML = lines.join("");
+          val.textContent = totalAmount.toLocaleString();
+          total.hidden = false;
+        }
       }
 
       // 6. 提交
