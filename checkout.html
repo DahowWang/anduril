@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>報名 / 無人軍團 新書發表暨簽名會</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="i-arr" viewBox="0 0 14 10">
+        <path d="M9 1L13 5L9 9" stroke="currentColor" stroke-width="1.5" fill="none" />
+        <path d="M0 5H13" stroke="currentColor" stroke-width="1.5" fill="none" />
+      </symbol>
+      <symbol id="i-back" viewBox="0 0 14 10">
+        <path d="M5 1L1 5L5 9" stroke="currentColor" stroke-width="1.5" fill="none" />
+        <path d="M14 5H1" stroke="currentColor" stroke-width="1.5" fill="none" />
+      </symbol>
+    </defs>
+  </svg>
+
+  <!-- ============ Status bar ============ -->
+  <header class="statusbar">
+    <div class="statusbar-inner">
+      <a href="index.html" class="brandmark">
+        <span class="brandmark-glyph"></span>
+        <span>無人軍團 / DRONE.LEGION</span>
+      </a>
+      <div class="statusbar-meta">
+        <span class="meta-hide-sm"><span class="dot"></span>SECURE FORM</span>
+        <span class="meta-hide-sm">CHECKOUT // 002</span>
+        <span id="utc-clock">--:--:-- UTC</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ Main shell ============ -->
+  <div class="checkout-shell">
+
+    <!-- ===== Form panel ===== -->
+    <main class="checkout-main" id="form-panel">
+      <div class="page-header">
+        <h1>報名資訊</h1>
+        <a href="index.html" class="back">
+          <svg class="arr" width="14" height="10"><use href="#i-back"/></svg>
+          回到首頁
+        </a>
+      </div>
+
+      <form id="signup-form" novalidate>
+        <!-- 票種選擇 -->
+        <div class="form-section" style="margin-top:0">
+          <div class="head">
+            <h3>選擇票種</h3>
+            <span class="num">/01</span>
+          </div>
+          <div class="choose-tickets" id="ticket-choose">
+            <label class="choose-card" data-ticket="bundle">
+              <input type="radio" name="ticket" value="bundle" style="position:absolute;opacity:0;pointer-events:none" />
+              <div class="code">BUNDLE / SEAT.B · RSV.002</div>
+              <h4>套票（含書）</h4>
+              <div class="seats">含《無人軍團》一本 · 限 30 席</div>
+              <div class="price"><span class="cur">NT$</span>799</div>
+              <ul>
+                <li>《無人軍團》新書一本</li>
+                <li>限定小禮</li>
+                <li>簽書活動</li>
+              </ul>
+            </label>
+            <label class="choose-card" data-ticket="admission">
+              <input type="radio" name="ticket" value="admission" style="position:absolute;opacity:0;pointer-events:none" />
+              <div class="code">ADMISSION / SEAT.C · RSV.003</div>
+              <h4>單人票</h4>
+              <div class="seats">不含書籍 · 限 30 席</div>
+              <div class="price"><span class="cur">NT$</span>499</div>
+              <ul>
+                <li>一般入場（不含書）</li>
+                <li>需自備書參與簽名</li>
+                <li>限定小禮</li>
+                <li>簽書活動</li>
+              </ul>
+            </label>
+          </div>
+        </div>
+
+        <!-- 個資 -->
+        <div class="form-section">
+          <div class="head">
+            <h3>個人資料</h3>
+            <span class="num">/02</span>
+          </div>
+          <div class="form-grid">
+            <div class="field full">
+              <label>
+                <span>姓名 / NAME</span>
+                <span class="req">REQUIRED</span>
+              </label>
+              <input type="text" name="name" id="f-name" placeholder="請輸入真實姓名" required />
+              <span class="err" id="err-name" hidden>請輸入姓名</span>
+            </div>
+
+            <div class="field">
+              <label>
+                <span>手機 / PHONE</span>
+                <span class="req">REQUIRED</span>
+              </label>
+              <input type="tel" name="phone" id="f-phone" placeholder="09xxxxxxxx" inputmode="numeric" maxlength="10" required />
+              <span class="err" id="err-phone" hidden>請輸入有效手機（10 碼）</span>
+            </div>
+
+            <div class="field">
+              <label>
+                <span>EMAIL</span>
+                <span class="req">REQUIRED</span>
+              </label>
+              <input type="email" name="email" id="f-email" placeholder="you@example.com" required />
+              <span class="err" id="err-email" hidden>請輸入有效 Email</span>
+            </div>
+
+            <div class="field full">
+              <label>
+                <span>備註 / NOTES</span>
+                <span class="help">OPTIONAL</span>
+              </label>
+              <textarea name="notes" id="f-notes" rows="3" placeholder="其他需協助事項…"></textarea>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- 發票 -->
+        <div class="form-section">
+          <div class="head">
+            <h3>發票資訊</h3>
+            <span class="num">/03</span>
+          </div>
+
+          <div class="inv-tabs">
+            <button type="button" class="inv-tab active" data-inv="ecloud">電子發票 / E-CLOUD</button>
+            <button type="button" class="inv-tab" data-inv="company">公司發票 / COMPANY</button>
+          </div>
+
+          <!-- 電子發票：手機載具 -->
+          <div class="form-grid" id="inv-ecloud-fields">
+            <div class="field full">
+              <label>
+                <span>手機載具 / CARRIER</span>
+                <span class="help">OPTIONAL · 不填則寄至 Email</span>
+              </label>
+              <input type="text" name="carrier" id="f-carrier" placeholder="/ABC1234" maxlength="8" autocapitalize="characters" />
+              <span class="err" id="err-carrier" hidden>載具格式：「/」開頭 + 7 碼英數</span>
+            </div>
+          </div>
+
+          <!-- 公司發票：統編 + 抬頭 -->
+          <div class="form-grid" id="inv-company-fields" hidden>
+            <div class="field">
+              <label>
+                <span>統一編號 / TAX ID</span>
+                <span class="req">REQUIRED</span>
+              </label>
+              <input type="text" name="tax_id" id="f-tax-id" placeholder="8 碼數字" inputmode="numeric" maxlength="8" />
+              <span class="err" id="err-tax-id" hidden>請輸入 8 碼統編</span>
+            </div>
+            <div class="field">
+              <label>
+                <span>公司抬頭 / TITLE</span>
+                <span class="req">REQUIRED</span>
+              </label>
+              <input type="text" name="tax_title" id="f-tax-title" placeholder="公司全名" />
+              <span class="err" id="err-tax-title" hidden>請輸入公司抬頭</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <label class="toggle-row" id="agree-row">
+            <span class="check" id="agree-check"></span>
+            <span class="text">
+              我已閱讀並同意活動條款，了解票券售出後不得退換，到場請出示報到 QR Code。
+            </span>
+          </label>
+        </div>
+
+        <button type="submit" class="go-btn" id="submit-btn" disabled>
+          <span>送出報名 / Submit</span>
+          <svg class="arr" width="14" height="10"><use href="#i-arr"/></svg>
+        </button>
+        <div class="secure">
+          <svg width="10" height="12" viewBox="0 0 10 12" fill="none">
+            <rect x="1" y="5" width="8" height="6" stroke="currentColor" stroke-width="1" fill="none" />
+            <path d="M3 5V3a2 2 0 1 1 4 0v2" stroke="currentColor" stroke-width="1" fill="none" />
+          </svg>
+          資料以 SSL 加密傳輸，僅用於本次活動報到
+        </div>
+      </form>
+    </main>
+
+    <!-- ===== Summary side ===== -->
+    <aside class="checkout-side">
+      <div class="sum-title">// ORDER SUMMARY</div>
+
+      <div class="sum-event">
+        <h4>無人軍團 / 新書發表暨簽名會</h4>
+        <div class="meta">
+          <span><span class="lab">DATE</span>2026.05.17 — SUN</span>
+          <span><span class="lab">TIME</span>13:00 報到 · 14:00 開始</span>
+          <span><span class="lab">VENUE</span>Tempo House Restaurant &amp; Bar</span>
+          <span><span class="lab">ADDR</span>台北市中山區建國北路二段 12 號</span>
+        </div>
+      </div>
+
+      <div id="sum-line-wrap">
+        <div class="sum-empty">SELECT A TICKET</div>
+      </div>
+
+      <div class="sum-total" id="sum-total" hidden>
+        <span class="lab">TOTAL</span>
+        <span class="val"><span class="cur">NT$</span><span id="sum-total-val">0</span></span>
+      </div>
+    </aside>
+
+  </div>
+
+  <!-- ============ Success panel (initially hidden) ============ -->
+  <main id="success-panel" class="checkout-main" hidden>
+    <div class="success">
+      <div class="success-mark"></div>
+      <h2>報名成功</h2>
+      <p>
+        系統已收到你的報名資料，活動相關提醒會寄到你填寫的 Email。<br />
+        請保留訂單編號，現場報到時出示。
+      </p>
+      <div class="order-id" id="order-id">DL-2026-XXXXXX</div>
+      <div>
+        <a href="index.html" class="btn btn-ghost">
+          回到首頁 <svg class="arr" width="14" height="10"><use href="#i-arr"/></svg>
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+  <script>
+    (function(){
+      const TICKETS = {
+        bundle:    { name: "套票（含書）", code: "RSV.002", price: 799, note: "含《無人軍團》一本" },
+        admission: { name: "單人票",       code: "RSV.003", price: 499, note: "不含書籍" }
+      };
+
+      // 1. URL ?t=bundle / ?t=admission 預選
+      const urlT = new URLSearchParams(location.search).get("t");
+      if (urlT && TICKETS[urlT]) {
+        const card = document.querySelector(`[data-ticket="${urlT}"]`);
+        if (card) {
+          card.classList.add("selected");
+          card.querySelector("input").checked = true;
+          updateSummary(urlT);
+        }
+      }
+
+      // 2. 票種卡片點選
+      document.querySelectorAll(".choose-card").forEach(card => {
+        card.addEventListener("click", e => {
+          // 防止點到內部 input 被 label 點兩次
+          document.querySelectorAll(".choose-card").forEach(c => c.classList.remove("selected"));
+          card.classList.add("selected");
+          card.querySelector("input").checked = true;
+          updateSummary(card.dataset.ticket);
+          validate();
+        });
+      });
+
+      // 2.5 發票切換
+      let invType = "ecloud";
+      const ecloudFields  = document.getElementById("inv-ecloud-fields");
+      const companyFields = document.getElementById("inv-company-fields");
+      document.querySelectorAll(".inv-tab").forEach(tab => {
+        tab.addEventListener("click", () => {
+          invType = tab.dataset.inv;
+          document.querySelectorAll(".inv-tab").forEach(t => t.classList.toggle("active", t === tab));
+          ecloudFields.hidden  = invType !== "ecloud";
+          companyFields.hidden = invType !== "company";
+          validate();
+        });
+      });
+
+      // 載具格式：/ + 7 碼英數
+      document.getElementById("f-carrier").addEventListener("input", e => {
+        e.target.value = e.target.value.toUpperCase();
+        validate();
+      });
+      document.getElementById("f-carrier").addEventListener("blur", () => {
+        const v = document.getElementById("f-carrier").value.trim();
+        toggleErr("f-carrier", "err-carrier", v.length > 0 && !/^\/[A-Z0-9]{7}$/.test(v));
+      });
+
+      // 統編：8 碼數字
+      document.getElementById("f-tax-id").addEventListener("input", e => {
+        e.target.value = e.target.value.replace(/\D/g, "");
+        validate();
+      });
+      document.getElementById("f-tax-id").addEventListener("blur", () => {
+        const v = document.getElementById("f-tax-id").value.trim();
+        toggleErr("f-tax-id", "err-tax-id", !/^\d{8}$/.test(v));
+      });
+      document.getElementById("f-tax-title").addEventListener("input", validate);
+      document.getElementById("f-tax-title").addEventListener("blur", () => {
+        const v = document.getElementById("f-tax-title").value.trim();
+        toggleErr("f-tax-title", "err-tax-title", v.length < 1);
+      });
+
+      // 3. 同意條款
+      const agreeRow = document.getElementById("agree-row");
+      let agreed = false;
+      agreeRow.addEventListener("click", e => {
+        e.preventDefault();
+        agreed = !agreed;
+        agreeRow.classList.toggle("checked", agreed);
+        document.getElementById("agree-check").textContent = agreed ? "✓" : "";
+        validate();
+      });
+
+      // 4. 即時驗證
+      const form = document.getElementById("signup-form");
+      const submitBtn = document.getElementById("submit-btn");
+      ["f-name", "f-phone", "f-email"].forEach(id => {
+        document.getElementById(id).addEventListener("input", validate);
+      });
+
+      // 手機 / Email 即時格式檢查
+      document.getElementById("f-phone").addEventListener("blur", () => {
+        const v = document.getElementById("f-phone").value.trim();
+        toggleErr("f-phone", "err-phone", !/^09\d{8}$/.test(v));
+      });
+      document.getElementById("f-email").addEventListener("blur", () => {
+        const v = document.getElementById("f-email").value.trim();
+        toggleErr("f-email", "err-email", !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v));
+      });
+      document.getElementById("f-name").addEventListener("blur", () => {
+        const v = document.getElementById("f-name").value.trim();
+        toggleErr("f-name", "err-name", v.length < 2);
+      });
+
+      function toggleErr(inputId, errId, hasErr) {
+        document.getElementById(inputId).classList.toggle("invalid", hasErr);
+        document.getElementById(errId).hidden = !hasErr;
+      }
+
+      function validate() {
+        const ticket = document.querySelector('input[name="ticket"]:checked');
+        const name   = document.getElementById("f-name").value.trim();
+        const phone  = document.getElementById("f-phone").value.trim();
+        const email  = document.getElementById("f-email").value.trim();
+        const carrier = document.getElementById("f-carrier").value.trim();
+        const taxId   = document.getElementById("f-tax-id").value.trim();
+        const taxTitle = document.getElementById("f-tax-title").value.trim();
+
+        let invOk = true;
+        if (invType === "ecloud") {
+          // 載具空字串 OK，否則必須符合格式
+          invOk = carrier.length === 0 || /^\/[A-Z0-9]{7}$/.test(carrier);
+        } else {
+          invOk = /^\d{8}$/.test(taxId) && taxTitle.length >= 1;
+        }
+
+        const ok = !!ticket
+                && name.length >= 2
+                && /^09\d{8}$/.test(phone)
+                && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+                && invOk
+                && agreed;
+        submitBtn.disabled = !ok;
+      }
+
+      // 5. 摘要更新
+      function updateSummary(ticketKey) {
+        const wrap  = document.getElementById("sum-line-wrap");
+        const total = document.getElementById("sum-total");
+        const val   = document.getElementById("sum-total-val");
+        if (!ticketKey || !TICKETS[ticketKey]) {
+          wrap.innerHTML = '<div class="sum-empty">SELECT A TICKET</div>';
+          total.hidden = true;
+          return;
+        }
+        const t = TICKETS[ticketKey];
+        wrap.innerHTML = `
+          <div class="sum-line">
+            <span class="name">${t.name}<small>${t.code} · ${t.note}</small></span>
+            <span class="val">NT$ ${t.price.toLocaleString()}</span>
+          </div>`;
+        val.textContent = t.price.toLocaleString();
+        total.hidden = false;
+      }
+
+      // 6. 提交
+      form.addEventListener("submit", e => {
+        e.preventDefault();
+        if (submitBtn.disabled) return;
+        submitBtn.querySelector("span").textContent = "處理中...";
+        submitBtn.disabled = true;
+        setTimeout(() => {
+          // 產訂單編號
+          const id = "DL-2026-" + Math.random().toString(36).slice(2, 8).toUpperCase();
+          document.getElementById("order-id").textContent = id;
+          document.querySelector(".checkout-shell").hidden = true;
+          document.getElementById("success-panel").hidden = false;
+          window.scrollTo(0, 0);
+        }, 800);
+      });
+    })();
+  </script>
+</body>
+</html>
