@@ -240,24 +240,6 @@
 
   </div>
 
-  <!-- ============ Success panel (initially hidden) ============ -->
-  <main id="success-panel" class="checkout-main" hidden>
-    <div class="success">
-      <div class="success-mark"></div>
-      <h2>報名成功</h2>
-      <p>
-        系統已收到你的報名資料，活動相關提醒會寄到你填寫的 Email。<br />
-        請保留訂單編號，現場報到時出示。
-      </p>
-      <div class="order-id" id="order-id">DL-2026-XXXXXX</div>
-      <div>
-        <a href="index.html" class="btn btn-ghost">
-          回到首頁 <svg class="arr" width="14" height="10"><use href="#i-arr"/></svg>
-        </a>
-      </div>
-    </div>
-  </main>
-
   <script src="script.js"></script>
   <script>
     (function(){
@@ -429,19 +411,20 @@
         }
       }
 
-      // 6. 提交
+      // 6. 提交 → 模擬導向金流，回來時 redirect 到 thanks.html
       form.addEventListener("submit", e => {
         e.preventDefault();
         if (submitBtn.disabled) return;
         submitBtn.querySelector("span").textContent = "處理中...";
         submitBtn.disabled = true;
         setTimeout(() => {
-          // 產訂單編號
           const id = "DL-2026-" + Math.random().toString(36).slice(2, 8).toUpperCase();
-          document.getElementById("order-id").textContent = id;
-          document.querySelector(".checkout-shell").hidden = true;
-          document.getElementById("success-panel").hidden = false;
-          window.scrollTo(0, 0);
+          const params = new URLSearchParams({
+            order: id,
+            bundle: QTY.bundle,
+            admission: QTY.admission
+          });
+          window.location.href = "thanks.html?" + params.toString();
         }, 800);
       });
     })();

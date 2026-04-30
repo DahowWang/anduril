@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>報名成功 / 無人軍團 新書發表暨簽名會</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="i-arr" viewBox="0 0 14 10">
+        <path d="M9 1L13 5L9 9" stroke="currentColor" stroke-width="1.5" fill="none" />
+        <path d="M0 5H13" stroke="currentColor" stroke-width="1.5" fill="none" />
+      </symbol>
+    </defs>
+  </svg>
+
+  <!-- ============ Status bar ============ -->
+  <header class="statusbar">
+    <div class="statusbar-inner">
+      <a href="index.html" class="brandmark">
+        <span class="brandmark-glyph"></span>
+        <span>無人軍團 / DRONE.LEGION</span>
+      </a>
+      <div class="statusbar-meta">
+        <span class="meta-hide-sm"><span class="dot"></span>RESERVATION CONFIRMED</span>
+        <span class="meta-hide-sm">RECEIPT // 003</span>
+        <span id="utc-clock">--:--:-- UTC</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="thanks-shell">
+    <div class="bg-grid"></div>
+
+    <div class="frame">
+      <!-- Hero / success -->
+      <section class="thanks-hero">
+        <div class="success-mark"></div>
+        <div class="hero-eyebrow">RESERVATION CONFIRMED · 報名成功</div>
+        <h1 class="thanks-title">感謝你的報名</h1>
+        <p class="thanks-tagline" id="thanks-tagline">
+          系統已收到付款，活動相關提醒會寄到你填寫的 Email。<br />
+          請保留訂單編號，現場報到時出示。
+        </p>
+        <div class="thanks-orderid">
+          <span class="lab">ORDER ID</span>
+          <span class="val" id="order-id">DL-2026-XXXXXX</span>
+        </div>
+      </section>
+
+      <div class="thanks-grid">
+
+        <!-- Event reminder -->
+        <section class="thanks-card">
+          <div class="thanks-kicker">
+            <span class="num">/01</span>
+            <span>EVENT · 活動資訊</span>
+          </div>
+          <dl class="thanks-dl">
+            <dt>DATE</dt>
+            <dd>2026.05.17（日）</dd>
+            <dt>CHECK-IN</dt>
+            <dd>13:30 開放報到</dd>
+            <dt>START</dt>
+            <dd>14:00 — 16:50</dd>
+            <dt>VENUE</dt>
+            <dd>Tempo House Restaurant &amp; Bar</dd>
+            <dt>ADDRESS</dt>
+            <dd>台北市中山區建國北路二段 12 號</dd>
+          </dl>
+        </section>
+
+        <!-- Order summary -->
+        <section class="thanks-card">
+          <div class="thanks-kicker">
+            <span class="num">/02</span>
+            <span>ORDER · 訂單明細</span>
+          </div>
+          <div id="order-lines">
+            <div class="thanks-line">
+              <span class="name">— <small>請從報名頁完成購票</small></span>
+              <span class="val">—</span>
+            </div>
+          </div>
+          <div class="thanks-total" id="order-total" hidden>
+            <span class="lab">TOTAL</span>
+            <span class="val"><span class="cur">NT$</span><span id="total-val">0</span></span>
+          </div>
+        </section>
+      </div>
+
+      <!-- Reminders -->
+      <section class="thanks-card thanks-reminders-card">
+        <div class="thanks-kicker">
+          <span class="num">/03</span>
+          <span>BEFORE YOU COME · 行前提醒</span>
+        </div>
+        <ul class="thanks-reminders">
+          <li>活動前 2 天會寄送報到 QR Code 至你填寫的 Email</li>
+          <li>請於 13:30 後抵達現場報到，14:00 準時開始活動</li>
+          <li>單人票（不含書）參加者請自備書籍參與簽書活動</li>
+          <li>如需取消或更改報名資訊，請來信 <a href="mailto:service@mixxin.tw">service@mixxin.tw</a></li>
+        </ul>
+      </section>
+
+      <!-- CTAs -->
+      <div class="thanks-actions">
+        <a href="#" id="cal-btn" class="btn btn-primary" target="_blank" rel="noopener">
+          加入 Google 行事曆 <svg class="arr" width="14" height="10"><use href="#i-arr"/></svg>
+        </a>
+        <a href="index.html" class="btn btn-ghost">
+          回到首頁 <svg class="arr" width="14" height="10"><use href="#i-arr"/></svg>
+        </a>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="frame">
+      <div class="footer-grid">
+        <div>
+          <div class="brandmark" style="margin-bottom:16px">
+            <span class="brandmark-glyph"></span>
+            <span style="color:var(--bone);font-size:12px;letter-spacing:.14em">無人軍團 / DRONE.LEGION</span>
+          </div>
+          <p>AI 戰爭王者 PALMER LUCKEY<br />與 ANDURIL 的崛起</p>
+          <p>FOX 蕭上農 · 寫樂文化出版</p>
+        </div>
+        <div>
+          <h5>EVENT</h5>
+          <a href="index.html#book">書籍介紹</a>
+          <a href="index.html#schedule">活動流程</a>
+          <a href="index.html#tickets">票務資訊</a>
+        </div>
+        <div>
+          <h5>VENUE</h5>
+          <a href="index.html#venue">Tempo House</a>
+          <a href="index.html#venue">交通指引</a>
+        </div>
+        <div>
+          <h5>CONTACT</h5>
+          <a href="mailto:service@mixxin.tw">SERVICE@MIXXIN.TW</a>
+        </div>
+      </div>
+      <div class="footer-bot">
+        <span>© 2026 寫樂文化 / 無人軍團 — All systems nominal.</span>
+        <span>BUILD 2026.04 · v1.0</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    (function(){
+      const TICKETS = {
+        bundle:    { name: "套票（含書）", code: "RSV.002", price: 799 },
+        admission: { name: "單人票",       code: "RSV.003", price: 499 }
+      };
+      const params = new URLSearchParams(location.search);
+
+      // Order ID
+      const order = params.get("order");
+      if (order) document.getElementById("order-id").textContent = order;
+
+      // Order lines
+      const bundleQty = Math.max(0, parseInt(params.get("bundle"), 10) || 0);
+      const admissionQty = Math.max(0, parseInt(params.get("admission"), 10) || 0);
+      const linesEl = document.getElementById("order-lines");
+      const totalEl = document.getElementById("order-total");
+      const totalValEl = document.getElementById("total-val");
+      const lines = [];
+      let total = 0;
+      for (const key of ["bundle", "admission"]) {
+        const qty = key === "bundle" ? bundleQty : admissionQty;
+        if (qty > 0) {
+          const t = TICKETS[key];
+          const sub = t.price * qty;
+          total += sub;
+          lines.push(
+            '<div class="thanks-line">' +
+              '<span class="name">' + t.name + ' × ' + qty +
+                '<small>' + t.code + ' · NT$ ' + t.price.toLocaleString() + ' / 張</small>' +
+              '</span>' +
+              '<span class="val">NT$ ' + sub.toLocaleString() + '</span>' +
+            '</div>'
+          );
+        }
+      }
+      if (lines.length > 0) {
+        linesEl.innerHTML = lines.join("");
+        totalValEl.textContent = total.toLocaleString();
+        totalEl.hidden = false;
+      }
+
+      // Google Calendar link (Taipei UTC+8 → UTC -8 hr)
+      // 2026-05-17 13:30 → 17:00 Taipei = 05:30 → 09:00 UTC
+      const calUrl = "https://calendar.google.com/calendar/render?action=TEMPLATE"
+        + "&text=" + encodeURIComponent("無人軍團 / 新書發表暨簽名會")
+        + "&dates=20260517T053000Z/20260517T090000Z"
+        + "&details=" + encodeURIComponent(
+            "Anduril × Fox 蕭上農 新書發表暨簽名會。\n"
+            + "13:30 報到 · 14:00 開始\n\n"
+            + "訂單編號：" + (order || "—") + "\n"
+            + "詳情：" + location.origin + "/" + location.pathname.split("/").slice(0, -1).join("/")
+          )
+        + "&location=" + encodeURIComponent("Tempo House Restaurant & Bar, 台北市中山區建國北路二段 12 號");
+      document.getElementById("cal-btn").href = calUrl;
+    })();
+  </script>
+</body>
+</html>
